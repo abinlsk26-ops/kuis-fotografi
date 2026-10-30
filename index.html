@@ -1,60 +1,15 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kuis Fotografi & Video Iklan</title>
-<style>
-:root { --bg:#101827; --panel:#19263a; --tile:#253752; --accent:#70e1c1; --text:#f5f7fb; --muted:#b8c5d8; }
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(135deg,#101827,#202b48);color:var(--text);min-height:100vh;padding:24px}
-main{max-width:900px;margin:auto}
-header{text-align:center;margin:8px 0 24px}
-h1{margin:0 0 8px;font-size:clamp(1.7rem,4vw,2.5rem)}
-header p{color:var(--muted);margin:0}
-.panel{background:rgba(25,38,58,.96);border:1px solid #354762;border-radius:20px;padding:clamp(18px,4vw,30px);box-shadow:0 16px 45px #0003}
-.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
-.num{border:0;border-radius:14px;background:var(--tile);color:white;font-size:1.3rem;font-weight:800;padding:20px 8px;cursor:pointer;transition:.15s}
-.num:hover{transform:translateY(-2px);background:#355176}
-.num.used{background:#31594f;color:#b9ffe9}
-.small{color:var(--muted);font-size:.92rem;text-align:center;margin-top:16px}
-.hidden{display:none!important}
-.question{font-size:clamp(1.25rem,3vw,1.8rem);line-height:1.4;margin:12px 0 22px}
-.label{color:var(--accent);font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800}
-.answer{background:#102c32;border:1px solid #327c72;border-radius:14px;padding:18px;margin:16px 0;font-size:1.15rem}
-.actions{display:flex;flex-wrap:wrap;gap:10px}
-button.action{border:0;border-radius:12px;padding:12px 17px;font-weight:750;cursor:pointer;font-size:1rem}
-.primary{background:var(--accent);color:#10251f}
-.secondary{background:#31435d;color:white}
-@media(max-width:560px){body{padding:12px}.grid{gap:7px}.num{padding:16px 4px;font-size:1.05rem;border-radius:10px}}
-</style>
-</head>
-<body>
-<main>
-<header><h1>🎯 Kuis Fotografi & Video Iklan</h1><p>Pilih nomor, jawab bersama kelompok, lalu buka jawabannya!</p></header>
-<section id="board" class="panel">
-  <div class="grid" id="grid"></div>
-  <p class="small">Nomor berwarna hijau menandakan soal sudah dipilih.</p>
-</section>
-<section id="card" class="panel hidden" aria-live="polite">
-  <div class="label" id="numberLabel">Pertanyaan</div>
-  <div class="question" id="question"></div>
-  <div id="answerBox" class="answer hidden"><strong>Jawaban:</strong><div id="answer"></div></div>
-  <div class="actions">
-    <button class="action primary" id="reveal">💡 Reveal Answer</button>
-    <button class="action secondary" id="back">↩ Kembali ke Nomor</button>
-  </div>
-</section>
-</main>
-<script>
-const qa = [
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Kuis Fotografi & Video Iklan</title><style>
+:root{--panel:#19263a;--tile:#253752;--accent:#70e1c1;--text:#f5f7fb;--muted:#b8c5d8}*{box-sizing:border-box}body{margin:0;font-family:system-ui,Arial,sans-serif;background:linear-gradient(135deg,#101827,#202b48);color:var(--text);min-height:100vh;padding:24px}main{max-width:900px;margin:auto}header{text-align:center;margin:8px 0 24px}h1{margin:0 0 8px;font-size:clamp(1.7rem,4vw,2.5rem)}header p,.small{color:var(--muted)}.panel{background:var(--panel);border:1px solid #354762;border-radius:20px;padding:clamp(18px,4vw,30px)}.grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.num{border:0;border-radius:14px;background:var(--tile);color:white;font-size:1.3rem;font-weight:800;padding:20px 8px;cursor:pointer}.num:hover{background:#355176}.num.used{background:#31594f;color:#b9ffe9}.small{text-align:center;margin-top:16px}.hidden{display:none!important}.label{color:var(--accent);font-size:.82rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800}.question{font-size:clamp(1.25rem,3vw,1.8rem);line-height:1.4;margin:12px 0 22px}.answer{background:#102c32;border:1px solid #327c72;border-radius:14px;padding:18px;margin:16px 0;font-size:1.15rem}.actions{display:flex;flex-wrap:wrap;gap:10px}button.action{border:0;border-radius:12px;padding:12px 17px;font-weight:750;cursor:pointer;font-size:1rem}.primary{background:var(--accent);color:#10251f}.secondary{background:#31435d;color:white}@media(max-width:560px){body{padding:12px}.grid{gap:7px}.num{padding:16px 4px;font-size:1.05rem}}
+</style></head><body><main><header><h1>🎯 Kuis Fotografi & Video Iklan</h1><p>Pilih nomor, jawab bersama kelompok, lalu buka jawabannya!</p></header><section id="board" class="panel"><div class="grid" id="grid"></div><p class="small">Nomor berwarna hijau menandakan soal sudah dipilih.</p></section><section id="card" class="panel hidden" aria-live="polite"><div class="label" id="numberLabel">Pertanyaan</div><div class="question" id="question"></div><div id="answerBox" class="answer hidden"><strong>Jawaban:</strong><div id="answer"></div></div><div class="actions"><button class="action primary" id="reveal">💡 Reveal Answer</button><button class="action secondary" id="back">↩ Kembali ke Nomor</button></div></section></main><script>
+const qa=[
 ["Apa fungsi aperture pada kamera?","Mengatur seberapa banyak cahaya yang masuk melalui lensa."],
+["Aperture seperti apa yang biasanya digunakan untuk membuat latar belakang tampak blur?","Aperture besar atau bukaan lebar (angka f kecil), misalnya f/1.8 atau f/2.8."],
 ["Apa yang dimaksud dengan komposisi dalam fotografi?","Cara menata atau menyusun elemen visual di dalam frame."],
-["Apa itu Rule of Thirds?","Teknik komposisi yang membagi frame menjadi 9 bagian dengan dua garis horizontal dan dua garis vertikal."],
+["Apa yang dimaksud dengan Rule of Thirds?","Teknik komposisi yang membagi frame menjadi 9 bagian menggunakan dua garis horizontal dan dua garis vertikal."],
 ["Apa yang dimaksud dengan shot size?","Ukuran atau luas area subjek yang terlihat di dalam frame."],
-["Shot size apa yang menampilkan seluruh tubuh tokoh dari kepala hingga kaki?","Full Shot (FS)."],
+["Shot size apa yang menampilkan seluruh tubuh manusia dari kepala hingga kaki?","Full Shot (FS)."],
 ["Shot size apa yang menonjolkan wajah dan ekspresi subjek?","Close-Up (CU)."],
-["Apa yang dimaksud dengan camera angle?","Sudut pandang kamera saat mengambil gambar subjek."],
+["Apa yang dimaksud dengan camera angle?","Sudut pandang atau posisi sudut kamera saat mengambil gambar subjek."],
 ["Apa nama angle ketika kamera berada di bawah subjek dan mengarah ke atas?","Low Angle."],
 ["Apa yang dimaksud dengan backlight?","Pencahayaan yang berasal dari belakang subjek dan mengarah ke kamera."],
 ["Apa fungsi side light dalam fotografi?","Menonjolkan tekstur, bentuk, dan dimensi subjek melalui kontras terang-gelap."],
@@ -64,32 +19,11 @@ const qa = [
 ["Apa yang dimaksud dengan video iklan?","Video yang digunakan untuk mempromosikan produk, jasa, atau merek dan menyampaikan pesan kepada audiens."],
 ["Apa perbedaan umum TVC dan Social Media Ads?","TVC ditayangkan melalui televisi, sedangkan Social Media Ads ditayangkan melalui platform media sosial."],
 ["Sebutkan tiga bagian umum struktur video iklan.","Opening/Hook, Body/Message, dan Closing/CTA."],
-["Apa fungsi bagian hook dalam video iklan?","Menarik perhatian audiens pada awal iklan."],
-["Apa yang dimaksud dengan target audience?","Kelompok audiens atau sasaran yang dituju oleh iklan."],
+["Dalam analisis video iklan, apa yang dimaksud dengan target audience?","Kelompok audiens atau sasaran yang dituju oleh iklan."],
 ["Apa arti CTA dalam video iklan?","Call to Action, yaitu ajakan kepada audiens untuk melakukan tindakan tertentu."],
 ["Sebutkan empat aspek yang bisa dianalisis dari sebuah video iklan.","Contohnya: brand/judul, target audience, manfaat produk, pesan utama, struktur cerita, visual, audio, tagline, atau CTA."]
 ];
-const grid = document.getElementById('grid');
-const board = document.getElementById('board');
-const card = document.getElementById('card');
-const qEl = document.getElementById('question');
-const aEl = document.getElementById('answer');
-const answerBox = document.getElementById('answerBox');
-const reveal = document.getElementById('reveal');
-const used = new Set();
-qa.forEach((item,i)=>{
- const b=document.createElement('button'); b.className='num'; b.textContent=i+1; b.setAttribute('aria-label','Pilih soal '+(i+1));
- b.addEventListener('click',()=>{
-   used.add(i); b.classList.add('used');
-   document.getElementById('numberLabel').textContent='Pertanyaan '+(i+1);
-   qEl.textContent=item[0]; aEl.textContent=item[1];
-   answerBox.classList.add('hidden'); reveal.classList.remove('hidden');
-   board.classList.add('hidden'); card.classList.remove('hidden');
- });
- grid.appendChild(b);
-});
-reveal.addEventListener('click',()=>{answerBox.classList.remove('hidden');reveal.classList.add('hidden')});
-document.getElementById('back').addEventListener('click',()=>{card.classList.add('hidden');board.classList.remove('hidden')});
-</script>
-</body>
-</html>
+const grid=document.getElementById('grid'),board=document.getElementById('board'),card=document.getElementById('card'),qEl=document.getElementById('question'),aEl=document.getElementById('answer'),answerBox=document.getElementById('answerBox'),reveal=document.getElementById('reveal');
+qa.forEach((item,i)=>{const b=document.createElement('button');b.className='num';b.textContent=i+1;b.setAttribute('aria-label','Pilih soal '+(i+1));b.addEventListener('click',()=>{b.classList.add('used');document.getElementById('numberLabel').textContent='Pertanyaan '+(i+1);qEl.textContent=item[0];aEl.textContent=item[1];answerBox.classList.add('hidden');reveal.classList.remove('hidden');board.classList.add('hidden');card.classList.remove('hidden')});grid.appendChild(b)});
+reveal.addEventListener('click',()=>{answerBox.classList.remove('hidden');reveal.classList.add('hidden')});document.getElementById('back').addEventListener('click',()=>{card.classList.add('hidden');board.classList.remove('hidden')});
+</script></body></html>
